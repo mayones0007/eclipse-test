@@ -1,26 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="nav">
+    <router-link to="/">Список валют</router-link>
+    <router-link to="/converter">Конвертер валют</router-link>
+  </div>
+  <router-view></router-view>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { onMounted } from 'vue'
+import { useCurrencyStore } from '../src/stores/currency'
+const store = useCurrencyStore()
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+onMounted(() => {
+  store.getСurrencyRates()
+})
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 40px;
+}
+.nav {
+  display: flex;
+  gap: 20px;
+  height: 40px;
 }
 </style>
