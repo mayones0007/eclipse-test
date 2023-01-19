@@ -27,7 +27,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useCurrencyStore } from '../../stores/currency'
+import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
 
 const filteredRates = computed(() => {

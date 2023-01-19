@@ -10,7 +10,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useCurrencyStore } from '../../stores/currency'
+import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
 
 const filter = ref(store.filter)
