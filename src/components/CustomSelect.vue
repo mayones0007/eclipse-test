@@ -10,8 +10,7 @@
 </template>
 
 <script setup>
-import {computed } from 'vue'
-import { defineProps, defineEmits } from "vue"
+import { computed } from 'vue'
 import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
 
@@ -22,3 +21,4 @@ const currencyRates = computed(() => {
   return store.currencyRates.map(item => item.CharCode)
 })
 </script>
+z

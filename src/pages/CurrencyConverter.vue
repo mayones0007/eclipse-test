@@ -22,10 +22,6 @@ const currency2 = ref(store.mainCurrency)
 const count1 = ref(1)
 const count2 = ref(1)
 
-const filteredRates = computed(() => {
-  return store.filteredRates
-})
-
 const mainCurrency = computed(() => {
   return store.mainCurrency
 })
@@ -37,7 +33,7 @@ const setMainCurrency = (code) => {
 
 const calculate = (code) => {
   currency2.value = code || currency2.value
-  const currency = filteredRates.value.find(currency => currency.CharCode === currency2.value)
+  const currency = store.filteredRates.find(currency => currency.CharCode === currency2.value)
   count2.value = (count1.value / currency.Value * currency.Nominal).toFixed(4)
 }
 
