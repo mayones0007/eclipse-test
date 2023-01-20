@@ -1,6 +1,10 @@
 <template>
   <CustomFilter/>
-  <CustomSelect title="Основная валюта" :selected="mainCurrency" @update="setMainCurrency"/>
+  <CustomSelect
+    title="Основная валюта"
+    :selected="mainCurrency"
+    @update="setMainCurrency"
+  />
   <CustomTable/>
 </template>
 

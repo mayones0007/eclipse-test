@@ -1,8 +1,10 @@
 <template>
   <div class="input-group mb-3">
-    <label class="input-group-text" for="select">{{title}}</label>
+    <label class="input-group-text" for="select">
+      {{title}}
+    </label>
     <select class="form-select" id="select" @change="$emit('update', $event.target.value)">
-      <option v-for="item of currencyRates" :key="item" :selected="item === selected">
+      <option v-for="item of charCodeList" :key="item" :selected="item === selected">
         {{item}}
       </option>
     </select>
@@ -17,8 +19,7 @@ const store = useCurrencyStore()
 defineProps(['title', 'selected'])
 defineEmits(['update'])
 
-const currencyRates = computed(() => {
+const charCodeList = computed(() => {
   return store.currencyRates.map(item => item.CharCode)
 })
 </script>
-z

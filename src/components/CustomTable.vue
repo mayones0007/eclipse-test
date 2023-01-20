@@ -12,14 +12,9 @@
       <tr v-for="rate of filteredRates" :key="rate.ID">
         <td>{{rate.NumCode}}</td>
         <td>{{rate.Name}}</td>
-        <td>{{rate.Nominal}} {{rate.CharCode}} - {{(rate.Value).toFixed(4)}} {{mainCurrency}}</td>
-        <td class="table__cell">
-          <div class="rate-green" :class="{'rate-red': (rate.Previous - rate.Value) < 0}">{{(rate.Previous - rate.Value).toFixed(4)}}</div>
-          <img class="icon__caret"
-            :class="{'icon__caret-reverse': (rate.Previous - rate.Value) < 0}"
-            src="icons/caret.svg"
-          >
-        </td>
+        <td>{{rate.Nominal}} {{rate.CharCode}} - {{rate.Value.toFixed(4)}} {{mainCurrency}}</td>
+        <td v-if="getDifference(rate) > 0" class="rate">{{getDifference(rate)}} &#9650;</td>
+        <td v-else class="rate rate-red">{{getDifference(rate)}} &#9660;</td>
       </tr>
     </tbody>
   </table>
@@ -37,28 +32,23 @@ const filteredRates = computed(() => {
 const mainCurrency = computed(() => {
   return store.mainCurrency
 })
+
+const getDifference = (item) => {
+  return (item.Previous - item.Value).toFixed(4)
+}
 </script>
 
 <style scoped>
-.table__cell {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
 .column__name-last {
   text-align: end;
 }
-.icon__caret {
-  transform: rotate(180deg);
-}
-.icon__caret-reverse {
-  filter:hue-rotate(270deg);
-  transform: rotate(0deg);
-}
-.rate-green {
-  color: green;
+.rate {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  color: green !important;
 }
 .rate-red {
-  color: red;
+  color: red !important;
 }
 </style>

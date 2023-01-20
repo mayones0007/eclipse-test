@@ -1,13 +1,35 @@
 <template>
   <div class="container">
     <div>
-      <CustomSelect title="Первая Валюта" :selected="mainCurrency" @update="setMainCurrency"/>
-      <input type="number" class="form-control" v-model="count1" @change="calculate(currency2)">
+      <CustomSelect
+        title="Первая Валюта"
+        :selected="mainCurrency"
+        @update="setMainCurrency"
+      />
+      <input
+        type="number"
+        class="form-control"
+        v-model="count1" 
+        @change="calculate(currency2)"
+      >
     </div>
-    <img src="icons/arrows.svg" class="swicher" @click="reverse">
+    <img
+      src="icons/arrows.svg"
+      class="swicher"
+      @click="reverse"
+    >
     <div>
-      <CustomSelect title="Вторая Валюта" :selected="currency2" @update="calculate"/>
-      <input type="number" class="form-control" v-model="count2" disabled>
+      <CustomSelect
+        title="Вторая Валюта"
+        :selected="currency2"
+        @update="calculate"
+      />
+      <input
+        type="number"
+        class="form-control"
+        v-model="count2"
+        disabled
+      >
     </div>
   </div>
 </template>
