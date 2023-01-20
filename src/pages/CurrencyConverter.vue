@@ -14,18 +14,17 @@
 
 <script setup>
 import CustomSelect from '../components/CustomSelect.vue'
-
 import { computed, ref } from 'vue'
 import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
 
-const filteredRates = computed(() => {
-  return store.filteredRates
-})
-
 const currency2 = ref(store.mainCurrency)
 const count1 = ref(1)
 const count2 = ref(1)
+
+const filteredRates = computed(() => {
+  return store.filteredRates
+})
 
 const mainCurrency = computed(() => {
   return store.mainCurrency

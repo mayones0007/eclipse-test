@@ -3,8 +3,8 @@ import axios from 'axios'
 
 export const useCurrencyStore = defineStore('currency', {
   state: () => ({
-    currencyRates: [],
     mainCurrency: 'RUB',
+    currencyRates: [],
     countedRates: [],
     filteredRates: [],
     filters: {},
@@ -12,7 +12,7 @@ export const useCurrencyStore = defineStore('currency', {
   actions: {
     async getСurrencyRates() {
       const response = await axios.get('https://www.cbr-xml-daily.ru/daily_json.js')
-      this.currencyRates = [...Object.values(response.data.Valute),{
+      this.currencyRates = [...Object.values(response.data.Valute), {
         "ID": "R00001",
         "NumCode": "643",
         "CharCode": "RUB",
@@ -26,7 +26,11 @@ export const useCurrencyStore = defineStore('currency', {
     },
     setFilter(params) {
       this.filters = params
-      this.filteredRates = this.filters?.filter ? this.countedRates.filter(currencyRate => this.filters.filterFields.some(field => currencyRate[field].toLowerCase().includes(this.filters.filter.toLowerCase()))) : this.countedRates
+      this.filteredRates = this.filters?.filter ? 
+      this.countedRates.filter(currencyRate => 
+        this.filters.filterFields.some(field => 
+          currencyRate[field].toLowerCase().includes(this.filters.filter.toLowerCase()))) : 
+      this.countedRates
     },
     setMainCurrency(CharCode) {
       this.mainCurrency = CharCode

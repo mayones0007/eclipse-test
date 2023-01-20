@@ -1,10 +1,8 @@
 <template>
-  <div class="input-group mb-3 search">
+  <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Введите название валюты или ее код" v-model.trim="filter">
-    <div class="input-group-append">
-      <button class="btn btn-outline-success" @click="setFilter">Поиск</button>
-      <button class="btn btn-outline-danger" @click="resetFilter">Сбросить</button>
-    </div>
+    <button class="btn btn-outline-success" @click="setFilter">Поиск</button>
+    <button class="btn btn-outline-danger" @click="resetFilter">Сбросить</button>
   </div>
 </template>
 
@@ -13,7 +11,7 @@ import { ref } from 'vue'
 import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
 
-const filter = ref(store.filter)
+const filter = ref('')
 const filterFields = ['NumCode', 'Name']
 
 const resetFilter = () => {

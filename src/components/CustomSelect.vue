@@ -10,12 +10,13 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
-defineProps(['title', 'selected'])
-defineEmits(['update'])
-
+import {computed } from 'vue'
+import { defineProps, defineEmits } from "vue"
 import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
+
+defineProps(['title', 'selected'])
+defineEmits(['update'])
 
 const currencyRates = computed(() => {
   return store.currencyRates.map(item => item.CharCode)
