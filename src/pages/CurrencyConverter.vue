@@ -1,32 +1,20 @@
 <template>
   <div class="container">
     <div>
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="mainCurrency">Первая Валюта</label>
-        <select class="form-select" id="mainCurrency" @change="setMainCurrency">
-          <option v-for="rate of filteredRates" :key="rate.ID" :selected="rate.CharCode === mainCurrency">
-            {{rate.CharCode}}
-          </option>
-        </select>
-      </div>
-      <input type="number" class="form-control" v-model="count1" @change="calculate">
+      <CustomSelect title="Первая Валюта" :selected="mainCurrency" @update="setMainCurrency"/>
+      <input type="number" class="form-control" v-model="count1" @change="calculate(currency2)">
     </div>
     <img src="icons/arrows.svg" class="swicher" @click="reverse">
     <div>
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="mainCurrency">Вторая Валюта</label>
-        <select class="form-select" id="mainCurrency" v-model="currency2" @change="calculate">
-          <option v-for="rate of filteredRates" :key="rate.ID" :selected="rate.CharCode === currency2">
-            {{rate.CharCode}}
-          </option>
-        </select>
-      </div>
+      <CustomSelect title="Вторая Валюта" :selected="currency2" @update="calculate"/>
       <input type="number" class="form-control" v-model="count2" disabled>
     </div>
   </div>
 </template>
 
 <script setup>
+import CustomSelect from '../components/CustomSelect.vue'
+
 import { computed, ref } from 'vue'
 import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
@@ -43,12 +31,13 @@ const mainCurrency = computed(() => {
   return store.mainCurrency
 })
 
-const setMainCurrency = (e) => {
-  store.setMainCurrency(e.target.value)
+const setMainCurrency = (code) => {
+  store.setMainCurrency(code)
   calculate()
 }
 
-const calculate = () => {
+const calculate = (code) => {
+  currency2.value = code || currency2.value
   const currency = filteredRates.value.find(currency => currency.CharCode === currency2.value)
   count2.value = (count1.value / currency.Value * currency.Nominal).toFixed(4)
 }

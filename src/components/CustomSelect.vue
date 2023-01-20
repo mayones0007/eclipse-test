@@ -1,28 +1,23 @@
 <template>
   <div class="input-group mb-3">
-    <label class="input-group-text" for="mainCurrency">Основная Валюта</label>
-    <select class="form-select" id="mainCurrency" @change="setMainCurrency">
-      <option v-for="rate of currencyRates" :key="rate.ID" :selected="rate.CharCode === mainCurrency">
-        {{rate.CharCode}}
+    <label class="input-group-text" for="select">{{title}}</label>
+    <select class="form-select" id="select" @change="$emit('update', $event.target.value)">
+      <option v-for="item of currencyRates" :key="item" :selected="item === selected">
+        {{item}}
       </option>
     </select>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
+defineProps(['title', 'selected'])
+defineEmits(['update'])
+
 import { useCurrencyStore } from '../stores/currency'
 const store = useCurrencyStore()
 
 const currencyRates = computed(() => {
-  return store.currencyRates
+  return store.currencyRates.map(item => item.CharCode)
 })
-
-const mainCurrency = computed(() => {
-  return store.mainCurrency
-})
-
-const setMainCurrency = (e) => {
-  store.setMainCurrency(e.target.value)
-}
 </script>
